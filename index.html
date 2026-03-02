@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Sunanda 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+--primary: #ff7eb3;
+--secondary: #ff758c;
+--glass: rgba(255, 255, 255, 0.2);
+--border: rgba(255, 255, 255, 0.4);
+}
+
+body {
+margin: 0;
+font-family: 'Quicksand', sans-serif;
+color: white;
+overflow: hidden;
+height: 100vh;
+width: 100vw;
+transition: background 1.5s ease-in-out;
+background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+}
+
+/* Background States */
+.bg0 { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
+.bg1 { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
+.bg2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+.bg3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+.bg4 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+
+/* Countdown */
+#timerScreen {
+position: fixed;
+inset: 0;
+background: #ff758c;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+font-size: 100px;
+font-family: 'Dancing Script', cursive;
+z-index: 9999;
+transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Music Toggle */
+#musicBtn {
+position: fixed;
+top: 20px; right: 20px;
+z-index: 1000;
+background: var(--glass);
+border: 1px solid white;
+padding: 10px;
+border-radius: 50%;
+cursor: pointer;
+backdrop-filter: blur(5px);
+}
+
+/* Page Layout */
+.page {
+display: none;
+position: absolute;
+inset: 0;
+padding: 20px;
+text-align: center;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.page.active { display: flex; animation: zoomIn 0.8s ease forwards; }
+
+@keyframes zoomIn {
+from { opacity: 0; transform: scale(0.85); }
+to { opacity: 1; transform: scale(1); }
+}
+
+.card {
+background: var(--glass);
+backdrop-filter: blur(20px);
+padding: 30px;
+border-radius: 35px;
+border: 1px solid var(--border);
+box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+max-width: 85%;
+width: 350px;
+position: relative;
+}
+
+h1 { font-family: 'Dancing Script', cursive; font-size: 38px; margin-bottom: 10px; }
+p { font-size: 18px; line-height: 1.6; min-height: 60px; }
+
+/* Secret Sign Magic */
+.sign-box {
+font-size: 70px;
+margin: 15px 0;
+display: inline-block;
+filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9));
+animation: glowPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes glowPulse {
+0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px #fff); }
+50% { transform: scale(1.1); filter: drop-shadow(0 0 25px #fff); }
+}
+
+/* Love Note Generator */
+#loveNoteBox {
+background: rgba(255, 255, 255, 0.3);
+border-radius: 15px;
+padding: 15px;
+margin: 10px 0;
+font-style: italic;
+font-weight: 600;
+min-height: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.btn-main {
+background: white;
+color: var(--secondary);
+border: none;
+padding: 14px 35px;
+border-radius: 50px;
+font-weight: bold;
+font-size: 16px;
+margin-top: 15px;
+cursor: pointer;
+transition: 0.3s;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.heart, .petal { position: absolute; pointer-events: none; z-index: 1; }
+
+#finalPopup {
+display: none;
+position: fixed;
+top: 50%; left: 50%;
+transform: translate(-50%, -50%);
+background: white;
+color: #ff477e;
+padding: 40px;
+border-radius: 40px;
+text-align: center;
+z-index: 10000;
+width: 80%;
+box-shadow: 0 0 80px rgba(255, 71, 126, 0.5);
+}
+</style>
+</head>
+<body class="bg0">
+
+<audio id="bgMusic" loop>
+<source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio>
+
+<div id="musicBtn" onclick="toggleMusic()">🎵</div>
+
+<div id="timerScreen">
+<div id="count">5</div>
+<span style="font-size: 20px; letter-spacing: 3px;">SHHH... IT'S A SECRET</span>
+</div>
+
+<div class="page" id="page0">
+<div style="font-size: 80px; animation: floaty 3s infinite ease-in-out;">🧸</div>
+<div class="card">
+<h1>Sunanda...</h1>
+<p data-text="I made something special just for you. Because you're the only person who holds the key to my heart. 🗝️"></p>
+<button class="btn-main">Enter Our World</button>
+</div>
+</div>
+
+<div class="page" id="page1">
+<div class="card">
+<h1>Our Secret 🤫</h1>
+<div class="sign-box">✨🤝✨</div>
+<p data-text="They say stars fade, but our secret sign? Never. It’s a promise written in the air between us."></p>
+<button class="btn-main">Next Surprise</button>
+</div>
+</div>
+
+<div class="page" id="page2">
+<div class="card">
+<h1>My Cute Angry Girl 😠💕</h1>
+<p data-text="You might get annoyed quickly, but even then, my heart skips a beat. You're beautiful even when you're 'scolding' me."></p>
+<button class="btn-main">Keep Going</button>
+</div>
+</div>
+
+<div class="page" id="page3">
+<div class="card">
+<h1>Why I Love You 💖</h1>
+<div id="loveNoteBox">Tap the button for a note...</div>
+<button class="btn-main" onclick="generateNote()" style="background: var(--secondary); color: white;">New Reason</button>
+<br>
+<button class="btn-main" onclick="nextPage()">Final Step</button>
+</div>
+</div>
+
+<div class="page" id="page4">
+<div class="card">
+<h1>Forever & Always</h1>
+<p data-text="No matter where life takes us, I'm staying right here by your side. You are my greatest adventure."></p>
+<button class="btn-main">Blow a Kiss 💋</button>
+</div>
+</div>
+
+<div id="finalPopup">
+<h1 style="font-size: 50px;">I Love You!</h1>
+<p style="color: #666; font-size: 20px;">Happy Birthday, Sunanda. <br>Our love is my favorite story. 🌸</p>
+<button class="btn-main" style="background: #ff477e; color: white;" onclick="closePopup()">I'm Yours 💖</button>
+</div>
+
+<script>
+let current = 0;
+let typingInterval;
+const music = document.getElementById("bgMusic");
+
+const loveNotes = [
+"Your smile lights up my darkest days.",
+"The way you care for me is everything.",
+"You make me want to be a better person.",
+"Your 'angry' face is actually adorable.",
+"I love the way we just 'get' each other.",
+"You are my favorite place to be.",
+"Every day with you is a new blessing."
+];
+
+// --- Countdown ---
+let time = 5;
+let countdown = setInterval(() => {
+time--;
+if (time > 0) document.getElementById("count").innerText = time;
+else {
+clearInterval(countdown);
+document.getElementById("timerScreen").style.transform = "translateY(-100%)";
+setTimeout(() => showPage(0), 500);
+}
+}, 1000);
+
+function toggleMusic() {
+if (music.paused) { music.play(); musicBtn.innerText = "⏸️"; }
+else { music.pause(); musicBtn.innerText = "🎵"; }
+}
+
+function generateNote() {
+const box = document.getElementById("loveNoteBox");
+const randomNote = loveNotes[Math.floor(Math.random() * loveNotes.length)];
+box.style.opacity = 0;
+setTimeout(() => {
+box.innerText = randomNote;
+box.style.opacity = 1;
+}, 200);
+}
+
+// --- Navigation ---
+function showPage(index) {
+clearInterval(typingInterval);
+document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+document.body.className = "bg" + index;
+const page = document.getElementById("page" + index);
+page.classList.add("active");
+typeText(page.querySelector("p"));
+}
+
+function nextPage() {
+current++;
+showPage(current);
+}
+
+document.querySelectorAll(".btn-main").forEach((btn) => {
+if (!btn.hasAttribute('onclick')) {
+btn.addEventListener("click", () => {
+if (current < 4) {
+nextPage();
+} else {
+kissExplosion();
+setTimeout(() => { document.getElementById("finalPopup").style.display = "block"; }, 500);
+}
+});
+}
+});
+
+function typeText(element) {
+if(!element) return;
+element.innerHTML = "";
+let text = element.getAttribute("data-text");
+let i = 0;
+typingInterval = setInterval(() => {
+element.innerHTML += text.charAt(i);
+i++;
+if (i >= text.length) clearInterval(typingInterval);
+}, 40);
+}
+
+// --- Particles ---
+function createParticle(symbol, className) {
+const p = document.createElement("div");
+p.className = className;
+p.innerHTML = symbol;
+p.style.left = Math.random() * 100 + "vw";
+p.style.fontSize = (Math.random() * 20 + 10) + "px";
+p.style.top = "100vh";
+document.body.appendChild(p);
+p.animate([
+{ transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+{ transform: `translateY(-110vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+], { duration: 5000 + Math.random() * 3000 }).onfinish = () => p.remove();
+}
+setInterval(() => createParticle("💖", "heart"), 800);
+setInterval(() => createParticle("🌸", "petal"), 1200);
+
+function kissExplosion() {
+for(let i=0; i<30; i++) {
+setTimeout(() => {
+const kiss = document.createElement("div");
+kiss.innerHTML = "💋";
+kiss.style.position = "fixed";
+kiss.style.left = "50%"; kiss.style.top = "50%";
+kiss.style.fontSize = "30px";
+document.body.appendChild(kiss);
+kiss.animate([
+{ transform: 'translate(-50%, -50%) scale(0)', opacity: 1 },
+{ transform: `translate(${Math.random()*600-300}px, ${Math.random()*600-300}px) scale(2)`, opacity: 0 }
+], { duration: 1500 }).onfinish = () => kiss.remove();
+}, i * 50);
+}
+}
+
+function closePopup() { document.getElementById("finalPopup").style.display = "none"; kissExplosion(); }
+</script>
+</body>
+</html>
